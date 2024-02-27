@@ -1,0 +1,15 @@
+{
+  "extends": ["//"],
+  "pipeline": {
+    "codegen": {
+      "inputs": ["src/api/**/*.ts", "../server/src/schema/schema.gql"],
+      "outputs": ["src/gql/**"]
+    },
+    "build": {
+      "dependsOn": ["^build"]
+    },
+    "dev": {
+      "dependsOn": ["^build"]
+    }
+  }
+}
