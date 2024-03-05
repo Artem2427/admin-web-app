@@ -1,6 +1,6 @@
 import { SelectItem } from '@/components/select/Select'
 import SimpleCell from '@/components/table/cells/SimpleCell'
-import { ReferralUserEntity } from '@/gql/graphql'
+import { ReferralUserEntity } from '@/generated/graphql'
 import { EMPTY_VALUE } from '@/utils/constants'
 import { ColumnDef } from '@tanstack/react-table'
 import dayjs from 'dayjs'

@@ -1,7 +1,7 @@
 import NotFound from '@/components/not-found/NotFound'
 import { SelectItem } from '@/components/select/Select'
 import { Table } from '@/components/table/Table'
-import { ReferralUserEntity } from '@/gql/graphql'
+import { ReferralUserEntity } from '@/generated/graphql'
 import { PaginationState, SortingState } from '@tanstack/react-table'
 import { Dispatch, FC, SetStateAction } from 'react'
 

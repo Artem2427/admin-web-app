@@ -21,6 +21,7 @@ import Eos from './svg/eos.svg?react'
 import Erc20 from './svg/erc20.svg?react'
 import Etc from './svg/etc.svg?react'
 import Eth from './svg/eth.svg?react'
+import Eye from './svg/eye.svg?react'
 import Ggr from './svg/ggr.svg?react'
 import Google from './svg/google.svg?react'
 import Layers from './svg/layers.svg?react'
@@ -36,14 +37,17 @@ import RepeatDeposits from './svg/repeat-deposits.svg?react'
 import Rouble from './svg/rouble.svg?react'
 import Rub from './svg/rub.svg?react'
 import Sbp from './svg/sbp.svg?react'
+import Settings from './svg/settings.svg?react'
 import Shib from './svg/shib.svg?react'
 import Sol from './svg/sol.svg?react'
 import Telegram from './svg/telegram.svg?react'
+import Trash from './svg/trash.svg?react'
 import Trc from './svg/trc.svg?react'
 import Usd from './svg/usd.svg?react'
 import Usdctrc from './svg/usdctrc.svg?react'
 import Usdp from './svg/usdp.svg?react'
 import Usdt from './svg/usdt.svg?react'
+import UserOutline from './svg/user-outline.svg?react'
 import User from './svg/user.svg?react'
 import Users from './svg/users.svg?react'
 import Vk from './svg/vk.svg?react'
@@ -81,6 +85,7 @@ export const Icons = {
   Erc20: Erc20,
   Etc: Etc,
   Eth: Eth,
+  Eye: Eye,
   Ggr: Ggr,
   Google: Google,
   Layers: Layers,
@@ -96,14 +101,17 @@ export const Icons = {
   Rouble: Rouble,
   Rub: Rub,
   Sbp: Sbp,
+  Settings: Settings,
   Shib: Shib,
   Sol: Sol,
   Telegram: Telegram,
+  Trash: Trash,
   Trc: Trc,
   Usd: Usd,
   Usdctrc: Usdctrc,
   Usdp: Usdp,
   Usdt: Usdt,
+  UserOutline: UserOutline,
   User: User,
   Users: Users,
   Vk: Vk,

@@ -1,6 +1,6 @@
 import { Icons } from '@/assets'
 import { Icon } from '@/components/icon/Icon'
-import { TransactionLoyaltyProgramEntity } from '@/gql/graphql'
+import { TransactionLoyaltyProgramEntity } from '@/generated/graphql'
 import { helperService } from '@/services/helper-service'
 import { convertCurrencyWithComma } from '@/utils/utils'
 import { Row } from '@tanstack/react-table'

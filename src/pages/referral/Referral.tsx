@@ -1,4 +1,3 @@
-import * as api from '@/api'
 import Button from '@/components/button/Button'
 import { DateRangePicker } from '@/components/date-range-picker/DateRangePicker'
 import Filter from '@/components/filter/Filter'
@@ -6,7 +5,12 @@ import { PageTitle } from '@/components/page-title/PageTitle'
 import { SelectItem } from '@/components/select/Select'
 import ReferralTable from '@/components/tables/referral-table/ReferralTable'
 import { Input } from '@/components/ui/input'
-import { CurrencyCode } from '@/gql/graphql'
+import {
+  CurrencyCode,
+  useRecalculateUserReferralIncomesMutation,
+  useUntieReferralMutation,
+} from '@/generated/graphql'
+import { withPermission } from '@/hocs/withPermission'
 import { useDebounce } from '@/hooks/useDebounce'
 import { useLoadingWithMinDisplayTime } from '@/hooks/useLoadingWithMinDisplayTime'
 import { usePagination } from '@/hooks/usePagination'
@@ -17,10 +21,10 @@ import {
   startOfNextMonth,
 } from '@/utils/constants'
 import { SortingState } from '@tanstack/react-table'
+import { permissions } from '@vega/permissions'
 import { BaseSyntheticEvent, useEffect, useState } from 'react'
 import { DateRange } from 'react-day-picker'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
-import { useMutation } from 'urql'
 
 type UserParams = {
   userId: string
@@ -79,13 +83,13 @@ const Referral = () => {
   })
 
   const [recalculateReferralsBalance, executeRecalculateReferralsBalance] =
-    useMutation(api.referral.recalculateReferralsBalance)
+    useRecalculateUserReferralIncomesMutation()
 
   const isLoadingRecalculateReferralsBalance = useLoadingWithMinDisplayTime(
     recalculateReferralsBalance.fetching,
   )
 
-  const [untieUser, executeUntieUser] = useMutation(api.referral.untieReferral)
+  const [untieUser, executeUntieUser] = useUntieReferralMutation()
 
   const handleBackToUser = () => {
     navigate(-1)
@@ -191,4 +195,4 @@ const Referral = () => {
   )
 }
 
-export default Referral
+export default withPermission(permissions.referrals.view)(Referral)

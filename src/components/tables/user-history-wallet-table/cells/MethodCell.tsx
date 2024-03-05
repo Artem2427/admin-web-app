@@ -1,4 +1,4 @@
-import { TransactionPaymentEntity } from '@/gql/graphql'
+import { TransactionPaymentEntity } from '@/generated/graphql'
 import { paymentMethodImages } from '@/utils/constants'
 import { Row } from '@tanstack/react-table'
 import { FC } from 'react'

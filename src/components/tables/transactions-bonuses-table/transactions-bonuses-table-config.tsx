@@ -1,5 +1,5 @@
 import SimpleCell from '@/components/table/cells/SimpleCell'
-import { TransactionLoyaltyProgramEntity } from '@/gql/graphql'
+import { TransactionLoyaltyProgramEntity } from '@/generated/graphql'
 import { capitalize } from '@/utils/utils'
 import { ColumnDef } from '@tanstack/react-table'
 import dayjs from 'dayjs'

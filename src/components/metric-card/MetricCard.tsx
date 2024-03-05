@@ -45,7 +45,7 @@ const MetricCard: FC<MetricCardProps> = ({
         <CardTitle className="text-sm font-medium text-primary">
           {label}
         </CardTitle>
-        <Icon component={icon} />
+        <Icon component={icon} color="#71717A" />
       </CardHeader>
       <CardContent className="flex justify-between">
         <div className="text-2xl font-bold text-primary">

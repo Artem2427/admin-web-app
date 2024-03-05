@@ -1,5 +1,5 @@
 import SimpleCell from '@/components/table/cells/SimpleCell'
-import { UserInAdminEntity } from '@/gql/graphql'
+import { UserInAdminEntity } from '@/generated/graphql'
 import { EMPTY_VALUE } from '@/utils/constants'
 import { ColumnDef } from '@tanstack/react-table'
 import dayjs from 'dayjs'

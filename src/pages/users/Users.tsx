@@ -1,10 +1,12 @@
 import { PageTitle } from '@/components/page-title/PageTitle'
 import UserTable from '@/components/tables/user-table/UserTable'
 import { Input } from '@/components/ui/input'
+import { withPermission } from '@/hocs/withPermission'
 import { useFetchUsers } from '@/hooks/useFetchUsers'
+import { permissions } from '@vega/permissions'
 import { FC } from 'react'
 
-export const Users: FC = () => {
+const Users: FC = () => {
   const {
     users,
     canPrev,
@@ -45,3 +47,5 @@ export const Users: FC = () => {
     </>
   )
 }
+
+export default withPermission(permissions.users.view)(Users)

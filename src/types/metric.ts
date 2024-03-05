@@ -1,5 +1,5 @@
 import { Icons } from '@/assets'
-import { CurrencyStatisticEntity } from '@/gql/graphql'
+import { CurrencyStatisticEntity } from '@/generated/graphql'
 
 export type MetricInfo = {
   id: string

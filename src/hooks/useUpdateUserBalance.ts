@@ -1,15 +1,14 @@
-import * as api from '@/api'
+import { useAdminUpdateUserBalanceMutation } from '@/generated/graphql'
 import { removeCommasAndConvertToNumber } from '@/utils/utils'
 import { useEffect } from 'react'
-import { UseQueryExecute, useMutation } from 'urql'
+import { UseQueryExecute } from 'urql'
 
 export const useEditUserBalance = (
   userId: number,
   onRefetchUsers?: UseQueryExecute,
 ) => {
-  const [updateUserBalanceResult, executeUpdateUserBalance] = useMutation(
-    api.user.updateUserBalance,
-  )
+  const [updateUserBalanceResult, executeUpdateUserBalance] =
+    useAdminUpdateUserBalanceMutation()
 
   const handleEditBalance = (values: {
     currencyId: number

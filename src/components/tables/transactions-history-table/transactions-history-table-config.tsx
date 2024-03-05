@@ -1,5 +1,8 @@
 import SimpleCell from '@/components/table/cells/SimpleCell'
-import { TransactionPaymentEntity, TransactionStatus } from '@/gql/graphql'
+import {
+  TransactionPaymentEntity,
+  TransactionStatus,
+} from '@/generated/graphql'
 import { EMPTY_VALUE } from '@/utils/constants'
 import { ColumnDef } from '@tanstack/react-table'
 import dayjs from 'dayjs'

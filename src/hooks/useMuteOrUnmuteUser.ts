@@ -1,7 +1,7 @@
-import * as api from '@/api'
-import { Duration } from '@/gql/graphql'
+import { useMuteUserMutation, useUnMuteUserMutation } from '@/generated/graphql'
+import { Duration } from '@/generated/graphql'
 import { useEffect } from 'react'
-import { UseQueryExecute, useMutation } from 'urql'
+import { UseQueryExecute } from 'urql'
 
 type Options = {
   userId: number
@@ -11,8 +11,8 @@ type Options = {
 
 export function useMuteOrUnmuteUser(options: Options) {
   const { userId, isMuted, onRefetch } = options
-  const [userMuteResult, executeUserMute] = useMutation(api.user.muteUser)
-  const [userUnmuteResult, executeUserUnmute] = useMutation(api.user.unMuteUser)
+  const [userMuteResult, executeUserMute] = useMuteUserMutation()
+  const [userUnmuteResult, executeUserUnmute] = useUnMuteUserMutation()
 
   const handleMuteOrUnmuteUser = (muteTimeDuration: Duration) => {
     if (isMuted) {

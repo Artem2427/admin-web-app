@@ -1,9 +1,11 @@
-import * as api from '@/api'
 import RejectTransactionAlert from '@/components/alerts/reject-transaction/RejectTransactionAlert'
 import { DropdownItem } from '@/components/dropdown/Dropdown'
 import { TableCellActions } from '@/components/table-cell-actions/TableCellActions'
+import {
+  useAdminApproveTransactionManuallyMutation,
+  useAdminRejectTransactionMutation,
+} from '@/generated/graphql'
 import { FC, useEffect, useRef, useState } from 'react'
-import { useMutation } from 'urql'
 
 import ApproveTransactionAlert from '../../alerts/approve-transaction/ApproveTransactionAlert'
 import AutoWithdrawalModal from '../../modals/auto-withdrawal/AutoWithdrawalModal'
@@ -42,13 +44,11 @@ const WithdrawalActionsCell: FC<Props> = ({ transactionId }) => {
   const rejectAlertTriggerRef = useRef<HTMLButtonElement>(null)
   const autoOutputTriggerRef = useRef<HTMLButtonElement>(null)
 
-  const [rejectTransactionResult, executeRejectTransaction] = useMutation(
-    api.transactions.rejectTransaction,
-  )
+  const [rejectTransactionResult, executeRejectTransaction] =
+    useAdminRejectTransactionMutation()
 
-  const [approveTransactionResult, executeApproveTransaction] = useMutation(
-    api.transactions.approveTransaction,
-  )
+  const [approveTransactionResult, executeApproveTransaction] =
+    useAdminApproveTransactionManuallyMutation()
 
   const handleRejectTransaction = (transactionId: string) => {
     executeRejectTransaction({

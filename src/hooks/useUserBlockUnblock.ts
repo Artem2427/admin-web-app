@@ -1,6 +1,9 @@
-import * as api from '@/api'
+import {
+  useBlockUserMutation,
+  useUnBlockUserMutation,
+} from '@/generated/graphql'
 import { useEffect } from 'react'
-import { UseQueryExecute, useMutation } from 'urql'
+import { UseQueryExecute } from 'urql'
 
 type Options = {
   userId: number
@@ -10,10 +13,8 @@ type Options = {
 
 export function useUserBlockUnblock(options: Options) {
   const { userId, isBanned, onRefetch } = options
-  const [userBlockResult, executeUserBlock] = useMutation(api.user.userBlock)
-  const [userUnBlockResult, executeUserUnBlock] = useMutation(
-    api.user.userUnBlock,
-  )
+  const [userBlockResult, executeUserBlock] = useBlockUserMutation()
+  const [userUnBlockResult, executeUserUnBlock] = useUnBlockUserMutation()
 
   const handleBanOrUnBanUser = () => {
     if (isBanned) {

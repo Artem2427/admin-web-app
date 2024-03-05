@@ -1,6 +1,6 @@
 import { Icon } from '@/components/icon/Icon'
 import { SelectItem } from '@/components/select/Select'
-import { CurrencyCode, ReferralUserEntity } from '@/gql/graphql'
+import { CurrencyCode, ReferralUserEntity } from '@/generated/graphql'
 import { convertCurrencyWithComma, countTotalAmount } from '@/utils/utils'
 import { Row } from '@tanstack/react-table'
 import { FC } from 'react'

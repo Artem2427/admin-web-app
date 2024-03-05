@@ -1,0 +1,15 @@
+mutation SignInAdmin($email: String!, $password: String!) {
+  signInAdmin(signInInput: { email: $email, password: $password }) {
+    isBlocked
+  }
+}
+
+mutation LogOut {
+  logout
+}
+
+mutation RefreshTokens {
+  refreshTokens {
+    accessToken
+  }
+}

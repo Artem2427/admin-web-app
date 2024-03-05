@@ -1,5 +1,5 @@
 import { Badge } from '@/components/ui/badge'
-import { TransactionPaymentEntity } from '@/gql/graphql'
+import { TransactionPaymentEntity } from '@/generated/graphql'
 import { transactionStatuses } from '@/utils/constants'
 import { Row } from '@tanstack/react-table'
 import { FC } from 'react'

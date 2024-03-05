@@ -1,5 +1,5 @@
 import { Icon } from '@/components/icon/Icon'
-import { TransactionPaymentEntity } from '@/gql/graphql'
+import { TransactionPaymentEntity } from '@/generated/graphql'
 import { EMPTY_VALUE } from '@/utils/constants'
 import { Row } from '@tanstack/react-table'
 import { FC } from 'react'

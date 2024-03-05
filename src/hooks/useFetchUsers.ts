@@ -1,10 +1,8 @@
-import * as api from '@/api'
-import { SortEnum } from '@/gql/graphql'
+import { SortEnum, useAdminFindAllUsersQuery } from '@/generated/graphql'
 import { useDebounce } from '@/hooks/useDebounce'
 import { usePagination } from '@/hooks/usePagination'
 import { SortingState } from '@tanstack/react-table'
 import { useState } from 'react'
-import { useQuery } from 'urql'
 
 export const useFetchUsers = () => {
   const [sorting, setSorting] = useState<SortingState>([])
@@ -13,8 +11,7 @@ export const useFetchUsers = () => {
   const [searchValue, setSearchValue] = useState<string>('')
   const debounceSearchValue = useDebounce(searchValue)
 
-  const [{ data, fetching, error }, refetchUsers] = useQuery({
-    query: api.user.getAllUsers,
+  const [{ data, fetching, error }, refetchUsers] = useAdminFindAllUsersQuery({
     variables: {
       paginationInput: {
         currentPage: pagination.pageIndex + 1,

@@ -1,4 +1,3 @@
-import * as api from '@/api'
 import Button from '@/components/button/Button'
 import Filter from '@/components/filter/Filter'
 import { Icon } from '@/components/icon/Icon'
@@ -9,7 +8,17 @@ import PromocodeTable, {
   Promocode,
 } from '@/components/tables/promocode-table/PromocodeTable'
 import { Input } from '@/components/ui/input'
-import { CreatePromocodeDto, SortEnum, UpdatePromocodeDto } from '@/gql/graphql'
+import {
+  CreatePromocodeDto,
+  SortEnum,
+  UpdatePromocodeDto,
+  useCurrenciesQuery,
+  usePromocodeCreateMutation,
+  usePromocodeDeleteMutation,
+  usePromocodeFindAllQuery,
+  usePromocodeUpdateMutation,
+} from '@/generated/graphql'
+import { withPermission } from '@/hocs/withPermission'
 import { useDebounce } from '@/hooks/useDebounce'
 import { usePagination } from '@/hooks/usePagination'
 import { helperService } from '@/services/helper-service'
@@ -20,6 +29,7 @@ import {
   promocodeTableActions,
 } from '@/types/promocode'
 import { SortingState } from '@tanstack/react-table'
+import { permissions } from '@vega/permissions'
 import {
   BaseSyntheticEvent,
   FC,
@@ -28,7 +38,6 @@ import {
   useMemo,
   useState,
 } from 'react'
-import { useMutation, useQuery } from 'urql'
 
 const Promocodes: FC = () => {
   const [sorting, setSorting] = useState<SortingState>([])
@@ -50,12 +59,9 @@ const Promocodes: FC = () => {
     null,
   )
 
-  const [currenciesList] = useQuery({
-    query: api.currency.getCurrencies,
-  })
+  const [currenciesList] = useCurrenciesQuery()
 
-  const [promocodes, fetchPromocodes] = useQuery({
-    query: api.promocode.getPromocodes,
+  const [promocodes, fetchPromocodes] = usePromocodeFindAllQuery({
     variables: {
       paginationInput: {
         currentPage: pagination.pageIndex + 1,
@@ -76,15 +82,12 @@ const Promocodes: FC = () => {
     },
   })
 
-  const [createPromocodeResult, executeCreatePromocode] = useMutation(
-    api.promocode.createPromocode,
-  )
-  const [updatePromocodeResult, executeUpdatePromocode] = useMutation(
-    api.promocode.updatePromocode,
-  )
-  const [deletePromocodeResult, executeDeletePromocode] = useMutation(
-    api.promocode.deleteOnePromocode,
-  )
+  const [createPromocodeResult, executeCreatePromocode] =
+    usePromocodeCreateMutation()
+  const [updatePromocodeResult, executeUpdatePromocode] =
+    usePromocodeUpdateMutation()
+  const [deletePromocodeResult, executeDeletePromocode] =
+    usePromocodeDeleteMutation()
 
   const handleOpenPromocodeModal = (action: PromocodeTableActionType) => {
     setSelectedAction(action)
@@ -283,4 +286,4 @@ const Promocodes: FC = () => {
   )
 }
 
-export default Promocodes
+export default withPermission(permissions.promo.view)(Promocodes)

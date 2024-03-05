@@ -1,3 +1,4 @@
+import { RefreshTokensDocument } from '@/generated/graphql'
 import { authService } from '@/services/auth-service'
 import { storageService } from '@/services/storage-service'
 import { Routes } from '@/utils/constants'
@@ -11,16 +12,6 @@ import {
   fetchExchange,
   mapExchange,
 } from 'urql'
-
-import * as auth from './auth'
-
-export * as currency from './currency'
-export * as auth from './auth'
-export * as promocode from './promocode'
-export * as user from './user'
-export * as wallet from './wallet'
-export * as transactions from './transactions'
-export * as referral from './referral'
 
 export const API_URL = import.meta.env.VITE_API
 
@@ -57,7 +48,7 @@ export const client = new Client({
           return isAuthError(error) || isForbidden(error)
         },
         async refreshAuth() {
-          const response = await utils.mutate(auth.refresh, {})
+          const response = await utils.mutate(RefreshTokensDocument, {})
 
           if (response.data?.refreshTokens) {
             storageService.set(IS_AUTHORIZED, true)

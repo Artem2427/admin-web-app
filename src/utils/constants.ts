@@ -6,7 +6,8 @@ import {
   LoyaltyType,
   MethodType,
   TransactionStatus,
-} from '@/gql/graphql'
+} from '@/generated/graphql'
+import { Permission, permissions } from '@vega/permissions'
 
 export const Routes = {
   Overview: '/',
@@ -14,6 +15,7 @@ export const Routes = {
   Users: '/users',
   User: '/users/:userId',
   Promocode: '/promocode',
+  Withdrawals: '/transactions/?tab=withdrawals',
   Referrals: '/users/:userId/referrals',
   Transactions: '/transactions',
   AdminAccess: '/admin-access',
@@ -24,6 +26,7 @@ export const RouteKeys = {
   Login: 'login',
   Users: 'users',
   User: 'user',
+  Withdrawals: 'withdrawals',
   Promocode: 'promocode',
   Referrals: 'referrals',
   Transactions: 'transactions',
@@ -33,32 +36,49 @@ export const RouteKeys = {
 export type RouteKey = (typeof RouteKeys)[keyof typeof RouteKeys]
 export type RoutePath = (typeof Routes)[keyof typeof Routes]
 
-export const PAGES_NAVIGATION = [
-  // TODO add in future
+export type PageNavigation = {
+  href: RoutePath
+  key: RouteKey
+  label: string
+  permission: Permission
+}
+
+export const pagesNavigation: PageNavigation[] = [
   {
     href: Routes.Overview,
     key: RouteKeys.Overview,
     label: 'Overview',
+    permission: permissions.overview.view,
   },
   {
     href: Routes.Users,
     key: RouteKeys.Users,
     label: 'Users',
+    permission: permissions.users.view,
   },
   {
     href: Routes.Transactions,
     key: RouteKeys.Transactions,
     label: 'Transactions',
+    permission: permissions.transactions.view,
+  },
+  {
+    href: Routes.Withdrawals,
+    key: RouteKeys.Withdrawals,
+    label: 'Withdrawals',
+    permission: permissions.withdrawals.view,
   },
   {
     href: Routes.Promocode,
     key: RouteKeys.Promocode,
     label: 'Promo',
+    permission: permissions.promo.view,
   },
   {
     href: Routes.AdminAccess,
     key: RouteKeys.AdminAccess,
     label: 'Admin access',
+    permission: permissions.adminAccess.view,
   },
 ]
 
@@ -92,6 +112,13 @@ export const historyWalletTabs = {
 } as const
 
 export type HistoryWalletTabsType = ValueOf<typeof historyWalletTabs>
+
+export const adminAccessTabs = {
+  admins: 'admins',
+  logs: 'logs',
+} as const
+
+export type AdminAccessTab = ValueOf<typeof adminAccessTabs>
 
 export const defaultWalletStatusOptions: DropdownItem[] = [
   {
@@ -158,6 +185,13 @@ export const defaultBonusStatusOptions: DropdownItem[] = [
     id: LoyaltyType.WeeklyBoost,
   },
 ]
+
+export const adminTableActions = {
+  edit: 'edit',
+  delete: 'delete',
+} as const
+
+export type AdminTableActionType = ValueOf<typeof adminTableActions>
 
 type MethodImages = {
   [key in MethodType]?: { url: string }

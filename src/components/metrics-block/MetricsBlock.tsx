@@ -1,4 +1,4 @@
-import { CurrencyStatisticEntity } from '@/gql/graphql'
+import { CurrencyStatisticEntity } from '@/generated/graphql'
 import { MetricInfo } from '@/types/metric'
 import { convertCurrencyWithComma } from '@/utils/utils'
 import { FC, useState } from 'react'

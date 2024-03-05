@@ -1,5 +1,5 @@
-import { UserPersonalInfoEntity } from '@/gql/graphql'
-import { Duration } from '@/gql/graphql'
+import { UserPersonalInfoEntity } from '@/generated/graphql'
+import { Duration } from '@/generated/graphql'
 import { UserWalletItem } from '@/types/user'
 import { FC, useRef, useState } from 'react'
 

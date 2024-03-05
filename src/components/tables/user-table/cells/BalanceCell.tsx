@@ -1,5 +1,5 @@
 import { Icon } from '@/components/icon/Icon'
-import { UserInAdminEntity } from '@/gql/graphql'
+import { UserInAdminEntity } from '@/generated/graphql'
 import { convertCurrencyWithComma } from '@/utils/utils'
 import { Row } from '@tanstack/react-table'
 import { FC } from 'react'

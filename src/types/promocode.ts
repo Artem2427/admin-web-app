@@ -1,4 +1,4 @@
-import { CreatePromocodeDto, UpdatePromocodeDto } from '@/gql/graphql'
+import { CreatePromocodeDto, UpdatePromocodeDto } from '@/generated/graphql'
 
 export const promocodeTableActions = {
   edit: 'edit',

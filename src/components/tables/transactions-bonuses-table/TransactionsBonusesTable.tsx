@@ -1,6 +1,6 @@
 import NotFound from '@/components/not-found/NotFound'
 import { Table } from '@/components/table/Table'
-import { TransactionLoyaltyProgramEntity } from '@/gql/graphql'
+import { TransactionLoyaltyProgramEntity } from '@/generated/graphql'
 import { PaginationState, SortingState } from '@tanstack/react-table'
 import { Dispatch, FC, SetStateAction } from 'react'
 

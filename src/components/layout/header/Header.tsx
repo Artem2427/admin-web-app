@@ -1,18 +1,17 @@
-import * as api from '@/api'
 import AlertDialog from '@/components/alert-dialog/AlertDialog'
 import Dropdown, { DropdownItem } from '@/components/dropdown/Dropdown'
 import Logo from '@/components/logo/Logo'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
-import { UserEntity } from '@/gql/graphql'
+import { useGetMeQuery, useLogOutMutation } from '@/generated/graphql'
 import { authService } from '@/services/auth-service'
+import { useUserStore } from '@/stores/useUserStore'
 import { dropdownVariant } from '@/utils/common'
-import { PAGES_NAVIGATION } from '@/utils/constants'
-import { cn } from '@/utils/utils'
+import { pagesNavigation } from '@/utils/constants'
+import { cn, isUserHasPermission } from '@/utils/utils'
 import { CaretSortIcon } from '@radix-ui/react-icons'
 import { FC, useEffect, useRef, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { useMutation, useQuery } from 'urql'
 
 const dropdownIds = {
   logout: 'logout',
@@ -40,14 +39,13 @@ const Header: FC = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
-  const [user, setUser] = useState<UserEntity | null>(null)
+  const [user, setUser] = useUserStore((state) => [state.user, state.setUser])
 
   const isAuthorized = authService.isLoggedIn()
 
-  const [logOutResult, executeLogOut] = useMutation(api.auth.logOut)
-  const [userInfo, fetchUserInfo] = useQuery({
-    query: api.user.getMe,
-    pause: true,
+  const [logOutResult, executeLogOut] = useLogOutMutation()
+  const [userInfo] = useGetMeQuery({
+    pause: !isAuthorized,
   })
 
   const isActiveLink = (href: string): boolean => {
@@ -91,15 +89,10 @@ const Header: FC = () => {
 
     if (data?.logout) {
       authService.logout()
+      setUser(null)
       navigate('/login')
     }
-  }, [logOutResult, navigate])
-
-  useEffect(() => {
-    if (isAuthorized) {
-      fetchUserInfo()
-    }
-  }, [isAuthorized, fetchUserInfo])
+  }, [logOutResult, navigate, setUser])
 
   useEffect(() => {
     if (userInfo.data && !userInfo.fetching) {
@@ -116,13 +109,19 @@ const Header: FC = () => {
         />
 
         <nav className="flex items-center space-x-4 lg:space-x-6">
-          {PAGES_NAVIGATION.map((page) => (
+          {pagesNavigation.map((page) => (
             <Link
               key={page.key}
               to={page.href}
               className={cn(
                 'text-sm font-medium text-muted-foreground transition-colors hover:text-primary',
-                { ['text-primary']: isActiveLink(page.href) },
+                {
+                  ['text-primary']: isActiveLink(page.href),
+                  ['pointer-events-none text-primary/40']: !isUserHasPermission(
+                    page.permission,
+                    user,
+                  ),
+                },
               )}
             >
               {page.label}

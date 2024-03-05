@@ -1,5 +1,5 @@
 import { Icons } from '@/assets'
-import { CurrencyCode } from '@/gql/graphql'
+import { CurrencyCode } from '@/generated/graphql'
 
 export type IconComponent = keyof typeof Icons
 

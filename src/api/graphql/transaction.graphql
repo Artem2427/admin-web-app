@@ -1,0 +1,13 @@
+mutation AdminRejectTransaction($rejectInput: RejectInput!) {
+  adminRejectTransaction(rejectInput: $rejectInput) {
+    id
+  }
+}
+
+mutation AdminApproveTransactionManually(
+  $approveManuallyInput: ApproveManuallyInput!
+) {
+  adminApproveTransactionManually(approveManuallyInput: $approveManuallyInput) {
+    id
+  }
+}

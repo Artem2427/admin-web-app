@@ -1,12 +1,11 @@
-import * as api from '@/api'
 import {
   TransactionPaymentEntity,
   TransactionStatus,
   TransactionType,
-} from '@/gql/graphql'
+  useGetUserWalletHistoryQuery,
+} from '@/generated/graphql'
 import { historyWalletTabs } from '@/utils/constants'
 import { PaginationState } from '@tanstack/react-table'
-import { useQuery } from 'urql'
 
 type Props = {
   activeTab: ValueOf<typeof historyWalletTabs>
@@ -29,8 +28,7 @@ export function useUserWalletHistory({
   checkedWalletHistoryStatuses,
   debounceSearchValue,
 }: Props): WalletHistoryResult {
-  const [userWalletHistoryResult] = useQuery({
-    query: api.user.userWalletHistory,
+  const [userWalletHistoryResult] = useGetUserWalletHistoryQuery({
     pause: activeTab === historyWalletTabs.bonuses,
     variables: {
       input: {

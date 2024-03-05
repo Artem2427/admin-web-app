@@ -1,7 +1,10 @@
-import * as api from '@/api'
-import { ReferralUserEntity, SortEnum } from '@/gql/graphql'
+import {
+  ReferralUserEntity,
+  SortEnum,
+  useFindUserReferralsQuery,
+} from '@/generated/graphql'
 import { PaginationState, SortingState } from '@tanstack/react-table'
-import { UseQueryExecute, useQuery } from 'urql'
+import { UseQueryExecute } from 'urql'
 
 type Props = {
   userId: number
@@ -23,8 +26,7 @@ export function useUserReferrals({
   pagination,
   sorting,
 }: Props): UserReferralsResult {
-  const [userReferralsResult, fetchUserReferrals] = useQuery({
-    query: api.referral.userReferrals,
+  const [userReferralsResult, fetchUserReferrals] = useFindUserReferralsQuery({
     variables: {
       input: {
         userId,

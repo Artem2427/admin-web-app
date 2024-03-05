@@ -1,3 +1,4 @@
+import AdminAccess from '@/pages/admin-access/AdminAccess'
 import Promocodes from '@/pages/promocodes/Promocodes'
 import Referral from '@/pages/referral/Referral'
 import User from '@/pages/user/User'
@@ -6,7 +7,7 @@ import { ReactNode } from 'react'
 import Login from '../pages/login/Login'
 import Overview from '../pages/overview/Overview'
 import Transactions from '../pages/transactions/Transactions'
-import { Users } from '../pages/users/Users'
+import Users from '../pages/users/Users'
 import { RouteKey, RouteKeys, RoutePath, Routes } from '../utils/constants'
 
 export type RouterItem = {
@@ -73,7 +74,7 @@ export const ROUTES = (): RouterItem[] => {
       path: Routes.AdminAccess,
       exact: true,
       requiresAuth: true,
-      component: <>AdminAccess page</>,
+      component: <AdminAccess />,
     },
   ]
 }

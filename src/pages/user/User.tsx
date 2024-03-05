@@ -1,4 +1,3 @@
-import * as api from '@/api'
 import { DateRangePicker } from '@/components/date-range-picker/DateRangePicker'
 import Dropdown, { DropdownItem } from '@/components/dropdown/Dropdown'
 import PersonalInformationForm from '@/components/forms/personal-information-form/PersonalInformationForm'
@@ -16,7 +15,11 @@ import {
   LoyaltyType,
   TransactionStatus,
   UpdateUserDataDto,
-} from '@/gql/graphql'
+  useAdminUpdateUserDataMutation,
+  useGetPersonalInfoByUserQuery,
+  useUserOverviewQuery,
+} from '@/generated/graphql'
+import { withPermission } from '@/hocs/withPermission'
 import { useDebounce } from '@/hooks/useDebounce'
 import { useMuteOrUnmuteUser } from '@/hooks/useMuteOrUnmuteUser'
 import { usePagination } from '@/hooks/usePagination'
@@ -38,10 +41,10 @@ import {
   userOverviewMetricsKeys,
 } from '@/utils/constants'
 import { countTotalAmount, formatCurrencyValue } from '@/utils/utils'
+import { permissions } from '@vega/permissions'
 import { BaseSyntheticEvent, FC, useEffect, useMemo, useState } from 'react'
 import { DateRange } from 'react-day-picker'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
-import { useMutation, useQuery } from 'urql'
 
 type UserParams = {
   userId: string
@@ -79,13 +82,13 @@ const User: FC = () => {
   const { userWalletsList } = useUserWallets(userIdNumber, true)
   const { handleEditBalance } = useEditUserBalance(userIdNumber)
 
-  const [userPersonalInfo, refetchUserPersonalInfo] = useQuery({
-    query: api.user.getPersonalInfoByUser,
-    variables: {
-      userId: userIdNumber,
-    },
-    requestPolicy: 'network-only',
-  })
+  const [userPersonalInfo, refetchUserPersonalInfo] =
+    useGetPersonalInfoByUserQuery({
+      variables: {
+        userId: userIdNumber,
+      },
+      requestPolicy: 'network-only',
+    })
 
   const { handleBanOrUnBanUser } = useUserBlockUnblock({
     userId: userIdNumber,
@@ -93,9 +96,8 @@ const User: FC = () => {
     onRefetch: refetchUserPersonalInfo,
   })
 
-  const [updateUserData, executeUpdateUserData] = useMutation(
-    api.user.adminUpdateUserData,
-  )
+  const [updateUserData, executeUpdateUserData] =
+    useAdminUpdateUserDataMutation()
 
   const filteredItems = useMemo(() => {
     return activeTab === historyWalletTabs.bonuses
@@ -132,8 +134,7 @@ const User: FC = () => {
     debounceSearchValue,
   })
 
-  const [userOverview] = useQuery({
-    query: api.user.getUserOverview,
+  const [userOverview] = useUserOverviewQuery({
     variables: {
       input: {
         userId: userIdNumber,
@@ -367,4 +368,4 @@ const User: FC = () => {
   )
 }
 
-export default User
+export default withPermission(permissions.users.view)(User)

@@ -1,8 +1,10 @@
-import * as api from '@/api'
-import { LoyaltyType, TransactionLoyaltyProgramEntity } from '@/gql/graphql'
+import {
+  LoyaltyType,
+  TransactionLoyaltyProgramEntity,
+  useUserBonusHistoryQuery,
+} from '@/generated/graphql'
 import { historyWalletTabs } from '@/utils/constants'
 import { PaginationState } from '@tanstack/react-table'
-import { useQuery } from 'urql'
 
 type Args = {
   activeTab: string
@@ -25,8 +27,7 @@ export function useUserBonuses({
   checkedBonusStatuses,
   debounceSearchValue,
 }: Args): BonusHistoryResult {
-  const [userBonusesResult] = useQuery({
-    query: api.user.userBonusHistory,
+  const [userBonusesResult] = useUserBonusHistoryQuery({
     pause: activeTab !== historyWalletTabs.bonuses,
     variables: {
       input: {

@@ -1,0 +1,27 @@
+query CurrencyWallets {
+  currencyWallets {
+    id
+    balance
+    userId
+    currencyId
+    currency {
+      id
+      code
+    }
+  }
+}
+
+query FindUserWallets($userId: Int!) {
+  userWallets(userId: $userId) {
+    id
+    address
+    destTag
+    userId
+    currencyId
+    balance
+    currency {
+      id
+      code
+    }
+  }
+}

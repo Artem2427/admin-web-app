@@ -11,13 +11,13 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { useSignInAdminMutation } from '@/generated/graphql'
 import { storageService } from '@/services/storage-service'
 import { IS_AUTHORIZED } from '@/utils/store-keys'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FC, RefObject, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
-import { useMutation } from 'urql'
 import * as z from 'zod'
 
 type SocialButton = {
@@ -59,7 +59,7 @@ const Login: FC = () => {
     },
   })
 
-  const [logInResult, executeLogIn] = useMutation(api.auth.logIn)
+  const [logInResult, executeLogIn] = useSignInAdminMutation()
 
   const onSubmit = (values: LogInFormSchema) => {
     executeLogIn({ ...values }).catch(console.error)

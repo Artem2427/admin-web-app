@@ -1,6 +1,6 @@
 import Dialog from '@/components/dialog/Dialog'
 import { Icon } from '@/components/icon/Icon'
-import { CurrencyStatisticEntity } from '@/gql/graphql'
+import { CurrencyStatisticEntity } from '@/generated/graphql'
 import { helperService } from '@/services/helper-service'
 import { Dispatch, FC, SetStateAction } from 'react'
 

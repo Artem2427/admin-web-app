@@ -7,6 +7,8 @@ import { DateRangePicker } from '@/components/date-range-picker/DateRangePicker'
 import OverviewChart from '@/components/overview-chart/OverviewChart'
 import { MOCK_DATA } from '@/components/overview-chart/mock'
 import { PageTitle } from '@/components/page-title/PageTitle'
+import { withPermission } from '@/hocs/withPermission'
+import { permissions } from '@vega/permissions'
 import { FC, useCallback, useEffect, useState } from 'react'
 import { DateRange } from 'react-day-picker'
 
@@ -108,4 +110,4 @@ const Overview: FC = () => {
   )
 }
 
-export default Overview
+export default withPermission(permissions.overview.view)(Overview)

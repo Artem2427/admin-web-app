@@ -1,4 +1,10 @@
-import { CurrencyCode } from '@/gql/graphql'
+import { CurrencyCode, UserEntity } from '@/generated/graphql'
+import {
+  Permission,
+  defaultMaskOrder,
+  fromPermissionMask,
+  hasPermission,
+} from '@vega/permissions'
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 
@@ -78,4 +84,20 @@ export function selectAmount<
   return selected === CurrencyCode.Rub
     ? Number(value.amountRub)
     : Number(value.amountUsd)
+}
+
+export function isUserHasPermission(
+  permission: Permission,
+  user: UserEntity | null,
+): boolean {
+  if (!user || !user.adminRights) {
+    return false
+  }
+
+  const permissionsMap = fromPermissionMask(
+    user.adminRights.accessMask,
+    defaultMaskOrder,
+  )
+
+  return hasPermission(permissionsMap, permission)
 }

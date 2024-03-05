@@ -1,13 +1,11 @@
-import * as api from '@/api'
+import { useFindUserWalletsQuery } from '@/generated/graphql'
 import { helperService } from '@/services/helper-service'
 import { UserWalletItem } from '@/types/user'
 import { useEffect, useState } from 'react'
-import { useQuery } from 'urql'
 
 export function useUserWallets(userId: number, isOpenDropdown: boolean) {
   const [userWalletsList, setUserWalletsList] = useState<UserWalletItem[]>([])
-  const [userWallets, fetchUserWallets] = useQuery({
-    query: api.wallet.getAllCurrencyWalletsByUser,
+  const [userWallets, fetchUserWallets] = useFindUserWalletsQuery({
     pause: true,
     variables: {
       userId,

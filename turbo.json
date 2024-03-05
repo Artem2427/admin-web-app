@@ -2,11 +2,14 @@
   "extends": ["//"],
   "pipeline": {
     "codegen": {
-      "inputs": ["src/api/**/*.ts", "../server/src/schema/schema.gql"],
-      "outputs": ["src/gql/**"]
+      "inputs": [
+        "src/api/graphql/*.graphql",
+        "../server/src/schema/schema.gql"
+      ],
+      "outputs": ["src/generated/**"]
     },
     "build": {
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build", "codegen"]
     },
     "dev": {
       "dependsOn": ["^build"]

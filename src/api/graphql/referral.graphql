@@ -1,0 +1,48 @@
+query FindUserReferrals($input: UserReferralsInput!) {
+  userReferrals(input: $input) {
+    data {
+      id
+      email
+      username
+      referralCode
+      totalBalance
+      socialId
+      avatarLink
+      createdAt
+      authProvider
+      isEmailConfirmed
+      muteTimeDuration
+      endBlocking
+      incomes {
+        currency {
+          id
+          code
+          type
+        }
+        balance {
+          amount
+          amountUsd
+          amountRub
+        }
+      }
+    }
+    metadata {
+      prev
+      next
+    }
+  }
+}
+
+mutation UntieReferral($userId: Int!) {
+  untieReferral(userId: $userId) {
+    id
+    referralCode
+    totalBalance
+    createdAt
+    authProvider
+  }
+}
+
+mutation RecalculateUserReferralIncomes($userId: Int!) {
+  recalculateUserReferralIncomes(userId: $userId)
+}

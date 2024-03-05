@@ -6,7 +6,7 @@ import TransactionsHistoryTable from '@/components/tables/transactions-history-t
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { LoyaltyType, TransactionStatus } from '@/gql/graphql'
+import { LoyaltyType, TransactionStatus } from '@/generated/graphql'
 import { useDebounce } from '@/hooks/useDebounce'
 import { usePagination } from '@/hooks/usePagination'
 import { useUserBonuses } from '@/hooks/useUserBonuses'

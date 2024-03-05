@@ -1,7 +1,7 @@
 import AlertDialog from '@/components/alert-dialog/AlertDialog'
 import { DropdownItem } from '@/components/dropdown/Dropdown'
 import { TableCellActions } from '@/components/table-cell-actions/TableCellActions'
-import { ReferralUserEntity } from '@/gql/graphql'
+import { ReferralUserEntity } from '@/generated/graphql'
 import { Row } from '@tanstack/react-table'
 import { FC, useRef, useState } from 'react'
 

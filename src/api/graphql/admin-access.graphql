@@ -1,0 +1,53 @@
+query AdminsLogs($paginationArgsDto: PaginationArgsDto!) {
+  adminLogs(PaginationArgsDto: $paginationArgsDto) {
+    metadata {
+      prev
+      next
+    }
+    data {
+      id
+      message
+      createdAt
+      user {
+        id
+        username
+      }
+    }
+  }
+}
+
+query AdminsForDropDown {
+  admins(paginationArgs: { currentPage: 1, perPage: 100 }) {
+    data {
+      id
+      email
+      username
+      createdAt
+    }
+  }
+}
+
+query Admins($paginationArgs: AdminsPaginationInput!) {
+  admins(paginationArgs: $paginationArgs) {
+    data {
+      id
+      email
+      username
+      createdAt
+      adminRights {
+        userId
+        accessMask
+        createdAt
+        updatedAt
+      }
+    }
+    metadata {
+      prev
+      next
+    }
+  }
+}
+
+mutation RevokeAdminPermissions($userId: Int!) {
+  revokeAdminPermissions(userId: $userId)
+}

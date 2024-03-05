@@ -8,7 +8,7 @@ import {
   FormItem,
   FormLabel,
 } from '@/components/ui/form'
-import { Duration } from '@/gql/graphql'
+import { Duration } from '@/generated/graphql'
 import { UserWalletItem } from '@/types/user'
 import { muteOptions } from '@/utils/constants'
 import { cn } from '@/utils/utils'

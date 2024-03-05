@@ -9,7 +9,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { UpdateUserDataDto, UserPersonalInfoEntity } from '@/gql/graphql'
+import { UpdateUserDataDto, UserPersonalInfoEntity } from '@/generated/graphql'
 import { EMPTY_VALUE } from '@/utils/constants'
 import { zodResolver } from '@hookform/resolvers/zod'
 import dayjs from 'dayjs'
